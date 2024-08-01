@@ -38,6 +38,8 @@ public class BaseTower : MonoBehaviour
     protected const float ProjectilePerSecondExponent = 0.6f;
     protected const float CostExponent = 0.8f;
 
+    private readonly float freezeFactor = 0.25f;
+
     protected virtual void Start()
     {
         baseProjectilePerSecond = projectilePerSecond;
@@ -105,11 +107,13 @@ public class BaseTower : MonoBehaviour
 
     public void OpenQuestionUI()
     {
+        Time.timeScale = freezeFactor;
         questionUI.SetActive(true);
     }
 
     public void CloseQuestionUI()
     {
+        Time.timeScale = 1f;
         questionUI.SetActive(false);
         UIManager.Instance.SetHoveringState(false);
     }
